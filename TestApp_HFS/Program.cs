@@ -1,22 +1,22 @@
 ﻿using System.IO.Ports;
 using TestApp_HFS;
-Console.WriteLine("Cписок доступных портов:");
+Console.WriteLine("Available ports:");
 string[] ports = SerialPort.GetPortNames();
 string portName = null;
 foreach (string availablePort in ports)
 {
     Console.WriteLine(availablePort);
 }
-Console.WriteLine("Введите порт");
+Console.WriteLine("Input port name");
 portName = Console.ReadLine();
 while (ports.All(x => x != portName))
 {
-    Console.WriteLine("Неправильный порт");
-    Console.WriteLine("Введите порт");
+    Console.WriteLine("Incorrect port name");
+    Console.WriteLine("Input port name");
     portName = Console.ReadLine();
 }
 
-Console.WriteLine($"Чтобы начать чтение данных из порта {portName} нажмите Enter");
+Console.WriteLine($"Press Enter to start listening port {portName}");
 if (Console.ReadLine() == string.Empty)
 {
     var port = new CustomSerialPort(portName);

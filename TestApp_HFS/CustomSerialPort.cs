@@ -10,6 +10,7 @@ namespace TestApp_HFS
 {
      class CustomSerialPort:SerialPort
      {
+        NatsSender natsSender = new NatsSender();
         public CustomSerialPort(string port)
             : base()
         {
@@ -19,10 +20,9 @@ namespace TestApp_HFS
             base.StopBits = StopBits.One;
             base.Parity = Parity.None;
             base.ReadTimeout = 1000;
-
             base.DataReceived += SerialPort_DataReceived;
         }
-        public void Open()
+        new public void Open()
         {
             if (base.IsOpen)
             {
@@ -47,11 +47,13 @@ namespace TestApp_HFS
                 {
                     byte[] answer = new byte[(int)port.BytesToRead];
                     port.Read(answer, 0, port.BytesToRead);
-                    Print(answer);
+                    //Print(answer);
+                    natsSender.Send(answer);
                 }
             }
             catch { }
             
+
         }
     }
 }
