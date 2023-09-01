@@ -1,5 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-using System.IO.Ports;
+﻿using System.IO.Ports;
 using TestApp_HFS;
 Console.WriteLine("Cписок доступных портов:");
 string[] ports = SerialPort.GetPortNames();
@@ -18,10 +17,10 @@ while (ports.All(x => x != portName))
 }
 
 Console.WriteLine($"Чтобы начать чтение данных из порта {portName} нажмите Enter");
-if (Console.ReadLine() == String.Empty)
+if (Console.ReadLine() == string.Empty)
 {
     var port = new CustomSerialPort(portName);
-    port.Open(portName);
+    port.Open();
 }
 while (true)
 {

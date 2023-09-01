@@ -10,8 +10,6 @@ namespace TestApp_HFS
 {
      class CustomSerialPort:SerialPort
      {
-        private const int DataSize = 1024;    //  я так и не понял, какой размер данных нужен. Укажите правильное число в байтах
-        private byte[] _bufer = new byte[DataSize];
         public CustomSerialPort(string port)
             : base()
         {
@@ -24,14 +22,12 @@ namespace TestApp_HFS
 
             base.DataReceived += SerialPort_DataReceived;
         }
-        //  открываем порт передав туда имя
-        public void Open(string portName)
+        public void Open()
         {
             if (base.IsOpen)
             {
                 base.Close();
             }
-            base.PortName = portName;
             base.Open();
         }
         public void Print(byte[] massive)
